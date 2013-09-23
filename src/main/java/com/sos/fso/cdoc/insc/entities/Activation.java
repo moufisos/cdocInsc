@@ -9,11 +9,13 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -27,23 +29,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "t_activation")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Activation.findAll", query = "SELECT a FROM Activation a"),
-    @NamedQuery(name = "Activation.findByIdActivation", query = "SELECT a FROM Activation a WHERE a.idActivation = :idActivation"),
-    @NamedQuery(name = "Activation.findByKey", query = "SELECT a FROM Activation a WHERE a.key = :key")})
+    @NamedQuery(name = "Activation.findAll", query = "SELECT a FROM Activation a")})
 public class Activation implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id_activation")
     private Integer idActivation;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(name = "key")
-    private String key;
-    @JoinColumn(name = "compte", referencedColumnName = "id_compte")
-    @ManyToOne
+    @Column(name = "activation_key")
+    private String activationKey;
+    @JoinColumn(name = "id_compte", referencedColumnName = "id_compte")
+    @OneToOne
     private Compte compte;
 
     public Activation() {
@@ -53,9 +53,9 @@ public class Activation implements Serializable {
         this.idActivation = idActivation;
     }
 
-    public Activation(Integer idActivation, String key) {
+    public Activation(Integer idActivation, String activationKey) {
         this.idActivation = idActivation;
-        this.key = key;
+        this.activationKey = activationKey;
     }
 
     public Integer getIdActivation() {
@@ -66,12 +66,12 @@ public class Activation implements Serializable {
         this.idActivation = idActivation;
     }
 
-    public String getKey() {
-        return key;
+    public String getActivationKey() {
+        return activationKey;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setActivationKey(String activationKey) {
+        this.activationKey = activationKey;
     }
 
     public Compte getCompte() {

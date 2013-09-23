@@ -65,7 +65,7 @@ public class Etudiant implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "cne")
-    private long cne;
+    private BigInteger cne;
     @Column(name = "optimistic_lock")
     private Integer optimisticLock;
     @Basic(optional = false)
@@ -118,7 +118,7 @@ public class Etudiant implements Serializable {
         this.idEtudiant = idEtudiant;
     }
 
-    public Etudiant(Integer idEtudiant, String cin, long cne, String nom, String prenom, Date dateNaissance, String email) {
+    public Etudiant(Integer idEtudiant, String cin, BigInteger cne, String nom, String prenom, Date dateNaissance, String email) {
         this.idEtudiant = idEtudiant;
         this.cin = cin;
         this.cne = cne;
@@ -144,11 +144,11 @@ public class Etudiant implements Serializable {
         this.cin = cin;
     }
 
-    public long getCne() {
+    public BigInteger getCne() {
         return cne;
     }
 
-    public void setCne(long cne) {
+    public void setCne(BigInteger cne) {
         this.cne = cne;
     }
 
