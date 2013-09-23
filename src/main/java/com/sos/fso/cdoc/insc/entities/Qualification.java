@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Qualification.findByDateObtention", query = "SELECT q FROM Qualification q WHERE q.dateObtention = :dateObtention"),
     @NamedQuery(name = "Qualification.findByDatePremiereInscription", query = "SELECT q FROM Qualification q WHERE q.datePremiereInscription = :datePremiereInscription"),
     @NamedQuery(name = "Qualification.findByDiplome", query = "SELECT q FROM Qualification q WHERE q.diplome = :diplome"),
-    @NamedQuery(name = "Qualification.findByMension", query = "SELECT q FROM Qualification q WHERE q.mension = :mension"),
+    @NamedQuery(name = "Qualification.findByMention", query = "SELECT q FROM Qualification q WHERE q.mention = :mention"),
     @NamedQuery(name = "Qualification.findByClassement", query = "SELECT q FROM Qualification q WHERE q.classement = :classement"),
     @NamedQuery(name = "Qualification.findByPartieDelivrante", query = "SELECT q FROM Qualification q WHERE q.partieDelivrante = :partieDelivrante"),
     @NamedQuery(name = "Qualification.findByNote1", query = "SELECT q FROM Qualification q WHERE q.note1 = :note1"),
@@ -72,8 +72,8 @@ public class Qualification implements Serializable {
     @Column(name = "diplome")
     private String diplome;
     @Size(max = 45)
-    @Column(name = "mension")
-    private String mension;
+    @Column(name = "mention")
+    private String mention;
     @Basic(optional = false)
     @NotNull
     @Column(name = "classement")
@@ -153,12 +153,12 @@ public class Qualification implements Serializable {
         this.diplome = diplome;
     }
 
-    public String getMension() {
-        return mension;
+    public String getMention() {
+        return mention;
     }
 
-    public void setMension(String mension) {
-        this.mension = mension;
+    public void setMention(String mention) {
+        this.mention = mention;
     }
 
     public int getClassement() {
