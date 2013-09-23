@@ -34,9 +34,14 @@ public class MailerBean {
 
     private static final Logger logger = Logger.getLogger(MailerBean.class.getName());
 
-
+    /**
+     *
+     * @param email
+     * @param key
+     * @return
+     */
     @Asynchronous
-    public Future<String> sendMessage(String email, String key) {
+    public Future<String> sendVerificationMail(String email, String key) {
         String status;
         try {
             Message message = new MimeMessage(session);

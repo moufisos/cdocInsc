@@ -8,15 +8,19 @@ package com.sos.fso.cdoc.insc.controllers;
 import com.sos.fso.cdoc.insc.entities.Activation;
 import com.sos.fso.cdoc.insc.entities.Compte;
 import com.sos.fso.cdoc.insc.entities.Etudiant;
+import com.sos.fso.cdoc.insc.helpers.Hash;
 import com.sos.fso.cdoc.insc.helpers.SendMail;
 import com.sos.fso.cdoc.insc.services.ActivationFacade;
 import com.sos.fso.cdoc.insc.services.CompteFacade;
 import com.sos.fso.cdoc.insc.services.EtudiantFacade;
+import com.sos.fso.cdoc.insc.services.MailerBean;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.Future;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 
 /**
@@ -43,7 +47,12 @@ public class EtudiantController implements Serializable {
     private ActivationFacade activationservice;
     private Activation activation;
     
-    private SendMail sendMail = new SendMail();
+    @Inject
+    protected MailerBean mailerBean;
+    protected String email;
+    protected String status;
+    private static final Logger logger = Logger.getLogger(EtudiantController.class.getName());
+    private Future<String> mailStatus;
     
     // ======================================
     // = Navigation Methods =
@@ -70,6 +79,22 @@ public class EtudiantController implements Serializable {
     // ======================================
     // = Business Methods =
     // ======================================
+    public void SendEmail(){
+        String response = "response?faces-redirect=true";
+        
+        try {
+            mailStatus = mailerBean.sendVerificationMail(newEtudiant.getEmail(), );
+            this.setStatus("Envoie en cours ...(veuillez rafraishir !!!)");
+        } catch (Exception ex) {
+            logger.severe(ex.getMessage());
+        }
+        
+        //return response;
+    }
+    
+    
+    
+    
     public List<Etudiant> getAll(){
         return etudiantService.findAll();
     }
@@ -82,13 +107,15 @@ public class EtudiantController implements Serializable {
         //Generation de la cle d'identification et envoie de mail d'activation
         final String key = UUID.randomUUID().toString();
         System.out.println("La cle generer est " + key);
-        try {
-            sendMail.SendEmail(newEtudiant.getEmail(), key);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        
+        
         
         //Creation Du compte
+        String password = newCompte.getPassword();
+        String hashedPassword = Hash.hash(password);
+        System.out.println("the hashed password is " + hashedPassword);
+        
+        newCompte.setPassword(hashedPassword);
         compteService.create(newCompte);
         System.out.println("Compte creer");
         //Definition de l'activation
@@ -133,5 +160,30 @@ public class EtudiantController implements Serializable {
     public void setNewCompte(Compte newCompte) {
         this.newCompte = newCompte;
     }
+
+    public Activation getActivation() {
+        return activation;
+    }
+
+    public void setActivation(Activation activation) {
+        this.activation = activation;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
     
 }

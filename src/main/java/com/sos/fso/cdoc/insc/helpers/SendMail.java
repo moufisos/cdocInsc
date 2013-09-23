@@ -31,7 +31,7 @@ public class SendMail {
         String response = "response?faces-redirect=true";
         
         try {
-            mailStatus = mailerBean.sendMessage(email, key);
+            mailStatus = mailerBean.sendVerificationMail(email, key);
             this.setStatus("Envoie en cours ...(veuillez rafraishir !!!)");
         } catch (Exception ex) {
             logger.severe(ex.getMessage());

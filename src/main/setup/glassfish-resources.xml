@@ -11,4 +11,20 @@
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="jdbc/cdocDB" object-type="user" pool-name="mysql_cdocInsc_rootPool"/>
+    
+    <mail-resource debug="false" 
+                   enabled="true" 
+                   from="mab.salhi@fso.ump.ma" 
+                   host="mail.fso.ump.ma" 
+                   jndi-name="mail/fsoMailer" 
+                   object-type="user" 
+                   store-protocol="imap" 
+                   store-protocol-class="com.sun.mail.imap.IMAPStore" 
+                   transport-protocol="smtp" 
+                   transport-protocol-class="com.sun.mail.smtp.SMTPTransport" 
+                   user="mab.salhi@fso.ump.ma">
+        <description>Dummy mail session. Replace the host, user, from, and mail-smtps-password values with ones apprpriate for your environment.</description>
+        <property name="mail-smtp-auth" value="true"/>
+        <property name="mail-smtp-password" value="abdel10+"/>
+    </mail-resource>
 </resources>
