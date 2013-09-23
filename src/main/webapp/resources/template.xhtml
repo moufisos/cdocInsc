@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="css/default.css" rel="stylesheet" type="text/css" />
+        <link href="css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <title>Facelets Template</title>
+         <!-- Le styles -->
+        <h:outputStylesheet name="css/bootstrap.min.css" />
+        <h:outputStylesheet name="css/DT_bootstrap.css" />
+<!-- JQuery DataTable plugin -->
+
+
+<style type="text/css">
+body {
+padding-top: 60px;
+padding-bottom: 40px;
+}
+
+.sidebar-nav {
+padding: 9px 0;
+}
+</style>
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- Le fav and touch icons
+<link rel="shortcut icon" href="../assets/ico/favicon.ico">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+-->
+
+
+    </h:head>
+
+    <h:body>
+        <div class="container">
+            
+        <div id="top">
+            <ui:insert name="top">
+                <div class="">
+                    <h:graphicImage name="images/logo.png" class="img-responsive"/>
+
+      </div>
+
+            </ui:insert>
+        </div>
+        <div class="body-content">
+            
+                <div id="left" class="col-lg-2">
+                <ui:insert name="left">Left</ui:insert>
+            </div>
+            <div id="content" class="col-lg-10">
+                <ui:insert name="content">Content</ui:insert>
+            </div>
+        
+            </div>
+            <div id="bottom" class="footer">
+            <ui:insert name="bottom">Bottom</ui:insert>
+        </div>
+
+        </div>
+
+<!-- JQuery DataTable plugin -->
+    </h:body>
+
+</html>
