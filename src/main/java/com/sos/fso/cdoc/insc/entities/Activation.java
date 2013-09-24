@@ -29,7 +29,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "t_activation")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Activation.findAll", query = "SELECT a FROM Activation a")})
+    @NamedQuery(name = "Activation.findAll", query = "SELECT a FROM Activation a"),
+    @NamedQuery(name = "Activation.findByActivationKey", query = "SELECT a FROM Activation a WHERE a.activationKey = :activationKey"),
+})
 public class Activation implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

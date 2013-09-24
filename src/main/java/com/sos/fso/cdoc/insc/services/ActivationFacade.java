@@ -28,4 +28,10 @@ public class ActivationFacade extends AbstractFacade<Activation> {
         super(Activation.class);
     }
     
+    public Activation getAccountByKey(String key){
+        return em.createNamedQuery("Activation.findByActivationKey", Activation.class)
+                .setParameter("activationKey", key).getSingleResult();
+        
+    }
+    
 }

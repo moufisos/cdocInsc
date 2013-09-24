@@ -76,14 +76,18 @@ public class EtudiantController implements Serializable {
     public String showList() {
         return "list?faces-redirect=true";
     }
+    
+    public String showRestricted() {
+        return "/secured/logedEtudiant?faces-redirect=true";
+    }
     // ======================================
     // = Business Methods =
     // ======================================
-    public void SendEmail(){
+    public void SendEmail(String email, String key){
         String response = "response?faces-redirect=true";
         
         try {
-            mailStatus = mailerBean.sendVerificationMail(newEtudiant.getEmail(), );
+            mailStatus = mailerBean.sendVerificationMail(email, key);
             this.setStatus("Envoie en cours ...(veuillez rafraishir !!!)");
         } catch (Exception ex) {
             logger.severe(ex.getMessage());
@@ -107,7 +111,7 @@ public class EtudiantController implements Serializable {
         //Generation de la cle d'identification et envoie de mail d'activation
         final String key = UUID.randomUUID().toString();
         System.out.println("La cle generer est " + key);
-        
+        SendEmail(newEtudiant.getEmail(), key);
         
         
         //Creation Du compte

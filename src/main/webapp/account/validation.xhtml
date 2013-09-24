@@ -15,15 +15,12 @@ and open the template in the editor.
     <h:body>
     <ui:composition template="../resources/template.xhtml">
         <ui:define name="content">	
-        <div></div>
+            <div>la cle de validation est : <strong>
+                    #{accountController.activation.compte.cne}
+                </strong></div>
         <p:messages for="update"/>
-        <h:form>
-            Votre compte a ete creer avec succes, vous receverez un mail d'activation dans votre adresse email mentionne.<br/>
-            Une fois votre compte activee, vous pourrez continuer la procedure d'inscription.        
-            <p:commandLink value="Go to retricted area" action="#{etudiantController.showRestricted}"/>
-        </h:form>
+       
         </ui:define>
     </ui:composition>
     </h:body>
 </html>
-            
