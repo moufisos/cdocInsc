@@ -31,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "t_compte")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Compte.findAll", query = "SELECT c FROM Compte c")})
+    @NamedQuery(name = "Compte.findAll", query = "SELECT c FROM Compte c"),
+    @NamedQuery(name = "Compte.findByCne", query = "SELECT c FROM Compte c WHERE c.cne = :cne")})
 public class Compte implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,7 +43,7 @@ public class Compte implements Serializable {
     @Column(name = "actif")
     private Boolean actif;
     @Column(name = "cne")
-    private BigInteger cne;
+    private long cne;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 255)
     @Column(name = "email")
@@ -54,6 +55,9 @@ public class Compte implements Serializable {
     private String password;
     @OneToOne(mappedBy = "compte")
     private Activation activation;
+    @Size(max = 255)
+    @Column(name = "groupe_name")
+    private String groupeName;
 
     public Compte() {
     }
@@ -78,11 +82,11 @@ public class Compte implements Serializable {
         this.actif = actif;
     }
 
-    public BigInteger getCne() {
+    public long getCne() {
         return cne;
     }
 
-    public void setCne(BigInteger cne) {
+    public void setCne(long cne) {
         this.cne = cne;
     }
 
@@ -118,6 +122,14 @@ public class Compte implements Serializable {
         this.activation = activation;
     }
 
+    public String getGroupeName() {
+        return groupeName;
+    }
+
+    public void setGroupeName(String groupeName) {
+        this.groupeName = groupeName;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

@@ -6,6 +6,7 @@
 package com.sos.fso.cdoc.insc.services;
 
 import com.sos.fso.cdoc.insc.entities.Compte;
+import java.math.BigInteger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,6 +27,10 @@ public class CompteFacade extends AbstractFacade<Compte> {
 
     public CompteFacade() {
         super(Compte.class);
+    }
+    
+    public Compte findByCne(long cne){
+        return em.createNamedQuery("Compte.findByCne", Compte.class).setParameter("cne", cne).getSingleResult();
     }
     
 }

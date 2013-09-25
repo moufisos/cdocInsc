@@ -22,26 +22,23 @@
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
     <security-constraint>
-        <display-name>Constraint1</display-name>
+        <display-name>Secured Pages</display-name>
         <web-resource-collection>
-            <web-resource-name>accessRestricted</web-resource-name>
+            <web-resource-name>Secured page</web-resource-name>
             <description/>
             <url-pattern>/secured/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
+            <role-name>candidat</role-name>
         </auth-constraint>
     </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
-        <realm-name>docInscRealm</realm-name>
+        <realm-name>jdbcRealm</realm-name>
         <form-login-config>
             <form-login-page>/security/login.xhtml</form-login-page>
             <form-error-page>/security/error.xhtml</form-error-page>
         </form-login-config>
     </login-config>
-    <security-role>
-        <description/>
-        <role-name>candidat</role-name>
-    </security-role>
 </web-app>

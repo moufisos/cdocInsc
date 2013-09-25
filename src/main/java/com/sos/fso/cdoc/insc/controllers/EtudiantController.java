@@ -9,7 +9,6 @@ import com.sos.fso.cdoc.insc.entities.Activation;
 import com.sos.fso.cdoc.insc.entities.Compte;
 import com.sos.fso.cdoc.insc.entities.Etudiant;
 import com.sos.fso.cdoc.insc.helpers.Hash;
-import com.sos.fso.cdoc.insc.helpers.SendMail;
 import com.sos.fso.cdoc.insc.services.ActivationFacade;
 import com.sos.fso.cdoc.insc.services.CompteFacade;
 import com.sos.fso.cdoc.insc.services.EtudiantFacade;
@@ -17,10 +16,15 @@ import com.sos.fso.cdoc.insc.services.MailerBean;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.Future;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 /**
@@ -43,6 +47,7 @@ public class EtudiantController implements Serializable {
     @Inject
     private CompteFacade compteService;
     private Compte newCompte;
+    private Compte compte;
     @Inject
     private ActivationFacade activationservice;
     private Activation activation;
@@ -80,9 +85,30 @@ public class EtudiantController implements Serializable {
     public String showRestricted() {
         return "/secured/logedEtudiant?faces-redirect=true";
     }
+    
+    public String showLoggedDetails(){
+        
+        long cne = compte.getCne();
+        System.out.println("le cne est : " + cne);
+        current = etudiantService.findByCne(cne);
+        System.out.println("La personne est : " + current.getNom() + "--> " + current.getCin());
+        
+        return "/etudiant/view?faces-redirect=true";
+    }
     // ======================================
     // = Business Methods =
     // ======================================
+    /*@PostConstruct
+    public void init(){
+        FacesContext fc = FacesContext.getCurrentInstance();
+        Map<String,String> params;
+        params = fc.getExternalContext().getRequestParameterMap();
+        String cne = params.get("j_username");
+        if (cne != null) {
+        compte = compteService.findByCne(cne);
+           }    
+    }*/
+    
     public void SendEmail(String email, String key){
         String response = "response?faces-redirect=true";
         
@@ -96,9 +122,6 @@ public class EtudiantController implements Serializable {
         //return response;
     }
     
-    
-    
-    
     public List<Etudiant> getAll(){
         return etudiantService.findAll();
     }
@@ -108,6 +131,7 @@ public class EtudiantController implements Serializable {
         newCompte.setCne(newEtudiant.getCne());
         newCompte.setEmail(newEtudiant.getEmail());
         newCompte.setActif(Boolean.FALSE);
+        newCompte.setGroupeName("candidat");
         //Generation de la cle d'identification et envoie de mail d'activation
         final String key = UUID.randomUUID().toString();
         System.out.println("La cle generer est " + key);
@@ -130,6 +154,18 @@ public class EtudiantController implements Serializable {
         //Creation de l'etudiant
         etudiantService.create(newEtudiant);
         return "waitValidation?faces-redirect=true";
+    }
+    
+    public String doEdit(){
+        if (current != null) {
+            try {
+                etudiantService.edit(current);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            
+        }
+        return "view?faces-redirect=true";
     }
     
     // ======================================
@@ -187,6 +223,22 @@ public class EtudiantController implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Compte getCompte() {
+        
+        if(compte == null){
+            Principal principal = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
+            if(principal != null){
+                long cne = Long.parseLong(principal.getName());
+                compte = compteService.findByCne(cne);
+            }
+        }        
+        return compte;
+    }
+
+    public void setCompte(Compte compte) {
+        this.compte = compte;
     }
     
     

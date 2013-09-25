@@ -48,7 +48,7 @@ public class Groupes implements Serializable {
     @Column(name = "intitule")
     private String intitule;
     @Column(name = "cne")
-    private BigInteger cne;
+    private long cne;
 
     public Groupes() {
     }
@@ -86,14 +86,15 @@ public class Groupes implements Serializable {
         this.intitule = intitule;
     }
 
-    public BigInteger getCne() {
+    public long getCne() {
         return cne;
     }
 
-    public void setCne(BigInteger cne) {
+    public void setCne(long cne) {
         this.cne = cne;
     }
 
+   
     @Override
     public int hashCode() {
         int hash = 0;

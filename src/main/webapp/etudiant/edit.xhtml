@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h1>Liste des cadres</h1>
+</h:head>
+    <h:body>
+    <ui:composition template="../resources/template.xhtml">
+        <ui:define name="content">	
+        <div></div>
+        <p:messages for="update"/>
+     
+            <p:panelGrid columns="3">
+                <p:outputLabel value="CNE :"/>
+                <p:inputText id="cne" value="#{etudiantController.current.cne}"
+                             required="true" requiredMessage="Veuillez saisir votre code national de l'etudiant"/>
+                <p:message for="cne"/>
+                
+                <p:outputLabel value="CIN :"/>
+                <p:inputText id="cin" value="#{etudiantController.current.cin}"
+                             required="true" requiredMessage="Veuillez saisir votre code didentite nationale !"/>
+                <p:message for="cin"/>
+                
+                <p:outputLabel value="Nom :"/>
+                <p:inputText id="nom" value="#{etudiantController.current.nom}"
+                             required="true" requiredMessage="Veuillez saisir votre nom"/>
+                <p:message for="nom"/>
+                
+                <p:outputLabel value="Prenom :"/>
+                <p:inputText id="prenom" value="#{etudiantController.current.prenom}"
+                             required="true" requiredMessage="Veuillez saisir votre prenom"/>
+                <p:message for="prenom"/>
+                
+                <p:outputLabel value="Date de naissance"/>
+                <p:calendar id="dateNaissance" value="#{etudiantController.current.dateNaissance}"
+                                mode="popup" pattern="dd/MM/yyyy"
+                                yearRange="c-100" locale="fr"
+                                showButtonPanel="true" navigator="true"
+                                required="true" requiredMessage="Veuillez selectionnez une Date de naissance" />
+                <p:message for="dateNaissance"/>
+                
+                <p:outputLabel value="emil :"/>
+                <p:inputText id="email" value="#{etudiantController.current.email}"
+                             required="true" requiredMessage="Veuillez saisir une adresse email valide">
+                    <f:validateRegex
+pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                </p:inputText>
+                <p:message for="email"/>
+                
+                <p:outputLabel value="Lieu de naissance :"/>
+                <p:inputText id="lieuNaissance" value="#{etudiantController.current.lieuNaissance}"
+                             />
+                <p:message for="lieuNaissance"/>
+                
+                <p:outputLabel value="Nationalite :"/>
+                <p:inputText id="nationalite" value="#{etudiantController.current.nationalite}"
+                             />
+                <p:message for="nationalite"/>
+                
+                <p:outputLabel value="sexe :"/>
+                <p:selectOneRadio id="sexe" value="#{etudiantController.current.sexe}">
+                    <f:selectItem itemLabel="Masculin" itemValue="true"/>
+                    <f:selectItem itemLabel="Feminin" itemValue="false"/>
+                </p:selectOneRadio>
+                <p:message for="lieuNaissance"/>
+                
+                
+                <p:outputLabel value="Etat matrimoniale :"/>
+                <p:selectOneRadio id="etatMatrimonial" value="#{etudiantController.current.etatMatrimonial}">
+                    <f:selectItem itemLabel="Celibataire" itemValue="true"/>
+                    <f:selectItem itemLabel="Marie(e)" itemValue="false"/>
+                </p:selectOneRadio>
+                
+                <p:outputLabel value="Fonctionaire :"/>
+                <p:selectOneRadio id="activite" value="#{etudiantController.current.activite}">
+                    <f:selectItem itemLabel="Oui" itemValue="true"/>
+                    <f:selectItem itemLabel="Non" itemValue="false"/>
+                </p:selectOneRadio>
+                
+                <p:outputLabel value="Adresse de corespondance :"/>
+                <p:inputTextarea id="nationalite" value="#{etudiantController.current.adresse}"
+                             />
+                
+                <p:outputLabel value="Numero de telephonne :"/>
+                <p:inputText id="nationalite" value="#{etudiantController.current.numTelephonne}"
+                             />
+                
+                <h:commandButton value="Enregistrer les Modification" action="#{etudiantController.doEdit}"/>
+            </p:panelGrid>
+    
+        </ui:define>
+    </ui:composition>
+    </h:body>
+</html>

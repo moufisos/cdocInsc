@@ -17,7 +17,7 @@ and open the template in the editor.
         <ui:define name="content">	
         <div></div>
         <p:messages for="update"/>
-        <h:form>
+
             <p:panelGrid columns="3">
                 <p:outputLabel value="CNE :"/>
                 <p:inputText id="cne" value="#{etudiantController.newEtudiant.cne}"
@@ -62,7 +62,7 @@ pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[
                 
                 <h:commandButton value="Enregistrer les donnee et continuer" action="#{etudiantController.doCreate}"/>
             </p:panelGrid>
-        </h:form>
+
         </ui:define>
     </ui:composition>
     </h:body>

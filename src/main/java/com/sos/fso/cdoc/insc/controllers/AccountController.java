@@ -30,7 +30,7 @@ public class AccountController {
     private Activation activation;
     
     @Inject
-            private CompteFacade compteService;
+    private CompteFacade compteService;
     private Compte compte;
     
     String validationKey;
@@ -48,11 +48,13 @@ public class AccountController {
         Map<String,String> params;
         params = facesContext.getExternalContext().getRequestParameterMap();
         String key = params.get("key");
+        
         validationKey = key;
         activation = activationService.getAccountByKey(validationKey);
         compte = activation.getCompte();
         this.doActivate();
     }
+    
     
     public void doActivate(){
         String message;

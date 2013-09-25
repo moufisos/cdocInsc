@@ -28,4 +28,8 @@ public class EtudiantFacade extends AbstractFacade<Etudiant> {
         super(Etudiant.class);
     }
     
+    public Etudiant findByCne(long cne){
+        return em.createNamedQuery("Etudiant.findByCne", Etudiant.class).setParameter("cne", cne).getSingleResult();
+    }
+    
 }
