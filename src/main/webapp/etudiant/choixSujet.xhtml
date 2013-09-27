@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h1>Liste des cadres</h1>
+</h:head>
+    <h:body>
+    <ui:composition template="../resources/template.xhtml">
+        <ui:define name="left">
+            <p:commandLink value="Editer donnee personnelle" action="#{etudiantController.showEdit}"/>
+            <p:commandLink value="Ajouter Une sujet" action="#{etudiantController.showAddQualification}"/>
+        </ui:define>
+        <ui:define name="content">	
+        <div></div>
+        <p:messages for="update"/>
+Formation Doctorales choisie :
+<p:dataTable id="QualificationList" value="#{etudiantController.branche.sujetList}" var="sujet">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Intitule"/>
+                    </f:facet>
+                    <h:outputText value="#{sujet.intitule}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Encadrant"/>
+                    </f:facet>
+                    <h:outputText value="#{sujet.encadrant}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Laboratoire / Equipe"/>
+                    </f:facet>
+                    <h:outputText value="#{sujet.labo}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Etablissement"/>
+                    </f:facet>
+                    <h:outputText value="#{sujet.etablissement}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Choisir"/>
+                    </f:facet>
+                    <h:commandButton value="Ajouter a la liste de choix" action="#{etudiantController.doAddSujetToEtudiantChoiceList(sujet)}"/>
+                </p:column>
+            </p:dataTable>
+
+        </ui:define>
+    </ui:composition>
+    </h:body>
+</html>

@@ -86,11 +86,11 @@ pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[
                 </p:selectOneRadio>
                 
                 <p:outputLabel value="Adresse de corespondance :"/>
-                <p:inputTextarea id="nationalite" value="#{etudiantController.current.adresse}"
+                <p:inputTextarea id="adresse" value="#{etudiantController.current.adresse}"
                              />
                 
                 <p:outputLabel value="Numero de telephonne :"/>
-                <p:inputText id="nationalite" value="#{etudiantController.current.numTelephonne}"
+                <p:inputText id="telephonne" value="#{etudiantController.current.numTelephonne}"
                              />
                 
                 <h:commandButton value="Enregistrer les Modification" action="#{etudiantController.doEdit}"/>

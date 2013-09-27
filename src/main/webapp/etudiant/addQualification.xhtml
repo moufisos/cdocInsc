@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <h1>Ajouter une qualification</h1>
+    </h:head>
+    <h:body>
+        <ui:composition template="../resources/template.xhtml">
+            <ui:define name="left">
+                <p:commandLink value="Editer donnee personnelle" action="#{etudiantController.showEdit}"/>
+                <p:commandLink value="Ajouter Une qualification" action="#{etudiantController.showAddQualification}"/>
+            </ui:define>
+            <ui:define name="content">	
+                <div></div>
+                <p:messages for="update"/>
+
+                <p:panelGrid columns="3">
+                    <p:outputLabel value="Date d'obtention du diplome"/>
+                    <p:calendar id="dateObtention" value="#{etudiantController.newQualification.dateObtention}"
+                                mode="popup" pattern="dd/MM/yyyy"
+                                yearRange="c-100" locale="fr"
+                                showButtonPanel="true" navigator="true"
+                                required="true" requiredMessage="Veuillez selectionnez une Date d'obtention" />
+                    <p:message for="dateObtention"/> 
+
+                    <p:outputLabel value="Date de premiere inscription"/>
+                    <p:calendar id="datePremiereInscription" value="#{etudiantController.newQualification.datePremiereInscription}"
+                                mode="popup" pattern="dd/MM/yyyy"
+                                yearRange="c-100" locale="fr"
+                                showButtonPanel="true" navigator="true"
+                                required="true" requiredMessage="Veuillez selectionnez une Date d'obtention" />
+                    <p:message for="datePremiereInscription"/> 
+
+                    <p:outputLabel value="Diplome :"/>
+                    <p:selectOneMenu id="diplome" value="#{etudiantController.newQualification.diplome}">  
+                        <f:selectItem itemLabel="Diplome" itemValue="" />  
+                        <f:selectItem itemLabel="Baccalaureat" itemValue="Baccalaureat" />  
+                        <f:selectItem itemLabel="Licence fondamentale" itemValue="Licence fondamentale" />  
+                        <f:selectItem itemLabel="Licence professionelle" itemValue="Licence professionelle" />
+                        <f:selectItem itemLabel="Master recherche" itemValue="Master recherche" />
+                        <f:selectItem itemLabel="Master specialise" itemValue="Master specialise" />
+                        <f:selectItem itemLabel="Diplome d'ingenieur" itemValue="Diplome d'ingenieur" />
+                        <f:selectItem itemLabel="Autre diplome equivalent" itemValue="Autre diplome equivalent" />
+                    </p:selectOneMenu>  
+                    <p:message for="diplome"/>
+
+                    <p:outputLabel value="Mention :"/>
+                    <p:selectOneMenu id="mention" value="#{etudiantController.newQualification.mention}"
+                                     required="true" requiredMessage="Veuillez saisir la mention du diplome">
+                        <f:selectItem itemLabel="Mention" itemValue="" />  
+                        <f:selectItem itemLabel="Passable" itemValue="Passable" />  
+                        <f:selectItem itemLabel="Assez bien" itemValue="Assez bien" />  
+                        <f:selectItem itemLabel="Bien" itemValue="Bien" />
+                        <f:selectItem itemLabel="Tres bien" itemValue="Tres bien" />
+                        <f:selectItem itemLabel="Excellent" itemValue="Excellent" />
+                    </p:selectOneMenu>
+                    <p:message for="mention"/>
+
+                    <p:outputLabel value="Classement :"/>
+                    <p:inputText id="classement" value="#{etudiantController.newQualification.classement}"
+                                 required="false" requiredMessage="Veuillez saisir votre classement"/>
+                    <p:message for="classement"/>
+
+                    <p:outputLabel value="Etablissement delivrant le diplome :"/>
+                    <p:inputText id="partieDelivrante" value="#{etudiantController.newQualification.partieDelivrante}"
+                                 required="true" requiredMessage="Veuillez saisir l'etablissement d'etude"/>
+                    <p:message for="partieDelivrante"/>
+
+                </p:panelGrid>
+                <div class="span10">
+                    <p:panelGrid columns="4">
+                        <p:outputLabel value="Note S1 :"/>
+                        <p:inputText id="note1" value="#{etudiantController.newQualification.note1}" />
+
+                        <p:outputLabel value="Note S2 :"/>
+                        <p:inputText id="note2" value="#{etudiantController.newQualification.note2}" />
+
+                        <p:outputLabel value="Note S3 :"/>
+                        <p:inputText id="note3" value="#{etudiantController.newQualification.note3}" />
+
+                        <p:outputLabel value="Note S4 :"/>
+                        <p:inputText id="note4" value="#{etudiantController.newQualification.note4}" />
+
+                        <p:outputLabel value="Note S5 :"/>
+                        <p:inputText id="note5" value="#{etudiantController.newQualification.note5}" />
+
+                        <p:outputLabel value="Note S6 :"/>
+                        <p:inputText id="note6" value="#{etudiantController.newQualification.note6}" />
+
+
+                    </p:panelGrid>
+                </div>
+                <p:commandButton value="Enregistrer ce parcours" action="#{etudiantController.doAddQualification}"/>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

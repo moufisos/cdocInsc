@@ -33,6 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Sujet.findByIdSujet", query = "SELECT s FROM Sujet s WHERE s.idSujet = :idSujet"),
     @NamedQuery(name = "Sujet.findByOptimisticLock", query = "SELECT s FROM Sujet s WHERE s.optimisticLock = :optimisticLock"),
     @NamedQuery(name = "Sujet.findByIntitule", query = "SELECT s FROM Sujet s WHERE s.intitule = :intitule"),
+    @NamedQuery(name = "Sujet.findByEncadrant", query = "SELECT s FROM Sujet s WHERE s.encadrant = :encadrant"),
+    @NamedQuery(name = "Sujet.findByLabo", query = "SELECT s FROM Sujet s WHERE s.labo = :labo"),
     @NamedQuery(name = "Sujet.findByNPlace", query = "SELECT s FROM Sujet s WHERE s.nPlace = :nPlace"),
     @NamedQuery(name = "Sujet.findByDescription", query = "SELECT s FROM Sujet s WHERE s.description = :description")})
 public class Sujet implements Serializable {
@@ -49,6 +51,21 @@ public class Sujet implements Serializable {
     @Size(min = 1, max = 75)
     @Column(name = "intitule")
     private String intitule;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 150)
+    @Column(name = "encadrant")
+    private String encadrant;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "labo")
+    private String labo;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "etablissement")
+    private String etablissement;
     @Column(name = "n_place")
     private Integer nPlace;
     @Size(max = 255)
@@ -94,6 +111,30 @@ public class Sujet implements Serializable {
         this.intitule = intitule;
     }
 
+    public String getEncadrant() {
+        return encadrant;
+    }
+
+    public void setEncadrant(String encadrant) {
+        this.encadrant = encadrant;
+    }
+
+    public String getLabo() {
+        return labo;
+    }
+
+    public void setLabo(String labo) {
+        this.labo = labo;
+    }
+
+    public String getEtablissement() {
+        return etablissement;
+    }
+
+    public void setEtablissement(String etablissement) {
+        this.etablissement = etablissement;
+    }
+    
     public String getDescription() {
         return description;
     }

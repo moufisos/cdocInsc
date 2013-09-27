@@ -31,10 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "ChoixSujet.findAll", query = "SELECT c FROM ChoixSujet c"),
     @NamedQuery(name = "ChoixSujet.findByIdChoix", query = "SELECT c FROM ChoixSujet c WHERE c.idChoix = :idChoix"),
-    @NamedQuery(name = "ChoixSujet.findByOptimisticLock", query = "SELECT c FROM ChoixSujet c WHERE c.optimisticLock = :optimisticLock"),
-    @NamedQuery(name = "ChoixSujet.findByEncadrant", query = "SELECT c FROM ChoixSujet c WHERE c.encadrant = :encadrant"),
-    @NamedQuery(name = "ChoixSujet.findByLaboEquipe", query = "SELECT c FROM ChoixSujet c WHERE c.laboEquipe = :laboEquipe"),
-    @NamedQuery(name = "ChoixSujet.findByEtablissement", query = "SELECT c FROM ChoixSujet c WHERE c.etablissement = :etablissement")})
+    @NamedQuery(name = "ChoixSujet.findByOptimisticLock", query = "SELECT c FROM ChoixSujet c WHERE c.optimisticLock = :optimisticLock")})
 public class ChoixSujet implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,21 +41,6 @@ public class ChoixSujet implements Serializable {
     private Integer idChoix;
     @Column(name = "optimistic_lock")
     private Integer optimisticLock;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 75)
-    @Column(name = "encadrant")
-    private String encadrant;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "labo_equipe")
-    private String laboEquipe;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "etablissement")
-    private String etablissement;
     @JoinColumn(name = "sujet", referencedColumnName = "id_sujet")
     @ManyToOne
     private Sujet sujet;
@@ -73,12 +55,7 @@ public class ChoixSujet implements Serializable {
         this.idChoix = idChoix;
     }
 
-    public ChoixSujet(Integer idChoix, String encadrant, String laboEquipe, String etablissement) {
-        this.idChoix = idChoix;
-        this.encadrant = encadrant;
-        this.laboEquipe = laboEquipe;
-        this.etablissement = etablissement;
-    }
+    
 
     public Integer getIdChoix() {
         return idChoix;
@@ -94,30 +71,6 @@ public class ChoixSujet implements Serializable {
 
     public void setOptimisticLock(Integer optimisticLock) {
         this.optimisticLock = optimisticLock;
-    }
-
-    public String getEncadrant() {
-        return encadrant;
-    }
-
-    public void setEncadrant(String encadrant) {
-        this.encadrant = encadrant;
-    }
-
-    public String getLaboEquipe() {
-        return laboEquipe;
-    }
-
-    public void setLaboEquipe(String laboEquipe) {
-        this.laboEquipe = laboEquipe;
-    }
-
-    public String getEtablissement() {
-        return etablissement;
-    }
-
-    public void setEtablissement(String etablissement) {
-        this.etablissement = etablissement;
     }
 
     public Sujet getSujet() {

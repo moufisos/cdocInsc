@@ -14,6 +14,11 @@ and open the template in the editor.
 </h:head>
     <h:body>
     <ui:composition template="../resources/template.xhtml">
+        <ui:define name="left">
+            <p:commandLink value="Editer donnee personnelle" action="#{etudiantController.showEdit}"/>
+            <p:commandLink value="Ajouter Une qualification" action="#{etudiantController.showAddQualification}"/>
+            <p:commandLink value="Ajouter Un choix de sujet" action="#{etudiantController.showSelectSujet}"/>
+        </ui:define>
         <ui:define name="content">	
         <div></div>
         <p:messages for="update"/>
@@ -39,12 +44,70 @@ and open the template in the editor.
                 <p:outputLabel id="dateNaissance" value="#{etudiantController.current.dateNaissance}"
                                 />
                 
-                <p:outputLabel value="emil :"/>
+                <p:outputLabel value="email :"/>
                 <p:outputLabel id="email" value="#{etudiantController.current.email}"
                              />
                 
                </p:panelGrid>
-   
+        
+        
+        <p:panelGrid columns="1">
+            <p:dataTable id="QualificationList" value="#{etudiantController.current.qualificationList}" var="qualification">
+                <p:column filterBy="#{qualification.diplome}">
+                    <f:facet name="header">
+                        <h:outputText value="Diplome"/>
+                    </f:facet>
+                    <h:outputText value="#{qualification.diplome}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Date d'obtention"/>
+                    </f:facet>
+                    <h:outputText value="#{qualification.dateObtention}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Date premiere inscription"/>
+                    </f:facet>
+                    <h:outputText value="#{qualification.datePremiereInscription}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Date d'obtention"/>
+                    </f:facet>
+                    <h:outputText value="#{qualification.mention}"/>
+                </p:column>
+            </p:dataTable>
+        </p:panelGrid>
+        <div id="row">Liste des choix</div>
+        <p:panelGrid columns="1">
+            <p:dataTable id="listChoix" value="#{etudiantController.current.choixSujetList}" var="choix">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Branche choisie"/>
+                    </f:facet>
+                    <h:outputText value="#{choix.sujet.branche.intitule}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Intitule"/>
+                    </f:facet>
+                    <h:outputText value="#{choix.sujet.intitule}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Encadrant"/>
+                    </f:facet>
+                    <h:outputText value="#{choix.sujet.encadrant}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Labo / Equipe"/>
+                    </f:facet>
+                    <h:outputText value="#{choix.sujet.labo}"/>
+                </p:column>
+            </p:dataTable>
+        </p:panelGrid>
         </ui:define>
     </ui:composition>
     </h:body>

@@ -1,16 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 package com.sos.fso.cdoc.insc.services;
 
+import com.sos.fso.cdoc.insc.exceptions.ValidationException;
 import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
  *
- * @author mab.salhi
+ * @author abdel
  */
 public abstract class AbstractFacade<T> {
     private Class<T> entityClass;
@@ -22,18 +22,33 @@ public abstract class AbstractFacade<T> {
     protected abstract EntityManager getEntityManager();
 
     public void create(T entity) {
+        if(entity == null)
+            throw new ValidationException(entity.getClass().getSimpleName() + " object is null !!");
+        
         getEntityManager().persist(entity);
+        getEntityManager().getEntityManagerFactory().getCache().evictAll();
     }
 
     public void edit(T entity) {
+        if(entity == null)
+            throw new ValidationException(entity.getClass().getSimpleName() + " object is null !!");
+        
         getEntityManager().merge(entity);
+        getEntityManager().getEntityManagerFactory().getCache().evictAll();
     }
 
     public void remove(T entity) {
+        if(entity == null)
+            throw new ValidationException(entity.getClass().getSimpleName() + " object is null !!");
+                
         getEntityManager().remove(getEntityManager().merge(entity));
+        getEntityManager().getEntityManagerFactory().getCache().evictAll();
     }
 
     public T find(Object id) {
+        if(id == null)
+            throw new ValidationException(id.getClass().getSimpleName() + "id is invalid !!");
+        
         return getEntityManager().find(entityClass, id);
     }
 

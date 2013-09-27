@@ -74,8 +74,6 @@ public class Qualification implements Serializable {
     @Size(max = 45)
     @Column(name = "mention")
     private String mention;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "classement")
     private int classement;
     @Size(max = 255)
