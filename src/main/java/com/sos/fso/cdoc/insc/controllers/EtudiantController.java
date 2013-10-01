@@ -85,6 +85,10 @@ public class EtudiantController implements Serializable {
             choix = item.getChoixSujetList().get(1);
             branche = choix.getSujet().getBranche();
             System.out.println("la branche : " + branche.getIntitule());
+            System.out.println("les choix " + current.getChoixSujetList().get(1).getSujet().getIntitule());
+        System.out.println("les choix " + current.getChoixSujetList().get(2).getSujet().getIntitule());
+        System.out.println("les choix " + current.getChoixSujetList().get(3).getSujet().getIntitule());
+        
         }
         return "view?faces-redirect=true";
     }
@@ -248,7 +252,7 @@ public class EtudiantController implements Serializable {
         choix.setEtudiant(current);
         System.out.println(" le choix est " + item.getIntitule());
         choix.setSujet(item);
-        current.getChoixSujetList().add(choix);
+        current.getChoixSujetList().add(choix);        
         etudiantService.edit(current);
     return "view?faces-redirect=true";
     }

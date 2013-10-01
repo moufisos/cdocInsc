@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  * @author mab.salhi
  */
 @Named(value = "loginController")
-@SessionScoped
+@RequestScoped
 public class LoginController implements Serializable {
 
     @Inject

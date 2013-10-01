@@ -8,6 +8,7 @@ package com.sos.fso.cdoc.insc.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -52,7 +53,7 @@ public class Branche implements Serializable {
     @Size(max = 255)
     @Column(name = "description")
     private String description;
-    @OneToMany(mappedBy = "branche")
+    @OneToMany(mappedBy = "branche", cascade = CascadeType.ALL)
     private List<Sujet> sujetList;
 
     public Branche() {

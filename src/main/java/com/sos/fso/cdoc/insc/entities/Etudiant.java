@@ -10,6 +10,7 @@ import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -106,9 +107,9 @@ public class Etudiant implements Serializable {
     private String adresse;
     @Column(name = "num_telephonne")
     private BigInteger numTelephonne;
-    @OneToMany(mappedBy = "etudiant")
+    @OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL)
     private List<ChoixSujet> choixSujetList;
-    @OneToMany(mappedBy = "etudiant")
+    @OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL)
     private List<Qualification> qualificationList;
 
     public Etudiant() {
